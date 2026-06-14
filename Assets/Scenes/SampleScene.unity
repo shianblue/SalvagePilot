@@ -206,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.97, z: -1.86}
+  m_LocalPosition: {x: 0, y: 1.23, z: -1.86}
   m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -875,7 +875,7 @@ Transform:
   m_GameObject: {fileID: 1449269280}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.65269, y: 15.73, z: 10.2697}
+  m_LocalPosition: {x: 7.65269, y: 16.1, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -899,7 +899,6 @@ MonoBehaviour:
   thrustForcerevers: 17
   thrustForcemove: 50
   thrustForcerevers_wasd: 17
-  stopper: {fileID: 352008374}
   rb: {fileID: 1449269281}
 --- !u!114 &1449269288
 MonoBehaviour:

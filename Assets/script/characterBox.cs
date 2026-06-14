@@ -11,19 +11,25 @@ public class characterBox : MonoBehaviour
     [SerializeField] private float thrustForcemove;
     [SerializeField] private float thrustForcerevers_wasd;
     
-    private int Jumpstatus = 0;
+    private JumpStatus Jumpstatus = JumpStatus.JumpNormal;
     private int WASD_status = 0;
     
     private float JumpTime = 0f;//逆噴射のための時間を入れる
     private float Wtime = 0f;
     
     private float y_speed = 0f;
-    
-    public GameObject stopper;
-    
-    private int stopper_count = 0;
+    private float x_speed = 0f;
+    private float z_speed = 0f;
     
     public Rigidbody rb;
+    
+    public enum JumpStatus
+    {
+        JumpNormal,//0
+        JumpAccelerate,//1
+        JumpReverse,//2
+        JumpStop,//3
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -31,20 +37,20 @@ public class characterBox : MonoBehaviour
 
     public void move()
     {
-        if (WASD_status == 1)
+        if (WASD_status == 1)//forward
         {
             rb.AddForce(Vector3.forward * thrustForcemove,ForceMode.Force);
             Wtime += Time.deltaTime;
             Debug.Log("前進中");
         }
 
-        if (WASD_status == 2)
+        if (WASD_status == 2)//back
         {
             rb.AddForce(Vector3.back * thrustForcerevers_wasd,ForceMode.Force);
             Wtime -= Time.deltaTime;
             Debug.Log("後ろ方向に噴射中");
         }
-        if (rb.linearVelocity.z <= 0.0f && !(rb.linearVelocity.z >= 0.0f))
+        if (rb.linearVelocity.z <= 0.0f && !(rb.linearVelocity.z >= 0.0f))//forward_back
         {
             WASD_status = 0;
             rb.linearVelocity = new Vector3(0, 0, 0);//このままだとすべての速度が止まるので、第一引数と第三引数に変数に格納した速度を入れる...WASDの逆噴射コード作成時に変更予定
@@ -63,22 +69,22 @@ public class characterBox : MonoBehaviour
     {
         //Debug.Log(rb.linearVelocity.y);
         Debug.Log(Jumpstatus);
-        if (Jumpstatus == 1)
+        if (Jumpstatus == JumpStatus.JumpAccelerate)
         {
             rb.AddForce(Vector3.up * thrustForceUp,ForceMode.Force);
             JumpTime += Time.deltaTime;
             Debug.Log("上方向に噴射中");
         }
-        if (Jumpstatus == 2)
+        if (Jumpstatus == JumpStatus.JumpReverse)
         {
             rb.AddForce(Vector3.down * thrustForcedown,ForceMode.Force);
             JumpTime -= Time.deltaTime;
             Debug.Log("下方向に噴射中");
         }
         
-        if (JumpTime <= 0 && rb.linearVelocity.y <= 0.0f && Jumpstatus != 1)//どうしても0～-1の間になってしまう。低速になったらrb.linearVelocityを0にするか、y+方向に小さい力を加えるかで対策できる可能性.....
+        if (JumpTime <= 0 && rb.linearVelocity.y <= 0.0f && Jumpstatus != JumpStatus.JumpAccelerate)//どうしても0～-1の間になってしまう。低速になったらrb.linearVelocityを0にするか、y+方向に小さい力を加えるかで対策できる可能性.....
         {
-            Jumpstatus = 3;
+            Jumpstatus = JumpStatus.JumpStop;
             //Debug.Log("噴射を停止");
             if (rb.linearVelocity.y <= 0.0f && !(rb.linearVelocity.y >= 0.0f))
             {
@@ -90,14 +96,14 @@ public class characterBox : MonoBehaviour
         {
             if (JumpTime <= 0)
             {
-                Jumpstatus = 0;
+                Jumpstatus = JumpStatus.JumpNormal;
             }
-            Jumpstatus = 1;
+            Jumpstatus = JumpStatus.JumpAccelerate;
             //Debug.Log("downspace");
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            Jumpstatus = 2;
+            Jumpstatus = JumpStatus.JumpReverse;
             //Debug.Log("upspace");
         }
     }
