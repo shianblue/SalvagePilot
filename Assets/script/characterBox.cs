@@ -55,22 +55,21 @@ public class characterBox : MonoBehaviour
     {
         if (Movestatus == MoveStatus.MoveForward)  // forward
         {
-            rb.AddForce(Vector3.forward * thrustForcemove, ForceMode.Force);
+            rb.AddForce(transform.forward * thrustForcemove, ForceMode.Force);  // 試験的にtransform.forwardに変更
             Wtime += Time.deltaTime;
             Debug.Log("前進中");
         }
 
         if (Movestatus == MoveStatus.MoveForwardReverse)  // back
         {
-            rb.AddForce(Vector3.back * thrustForcerevers_wasd, ForceMode.Force);
+            rb.AddForce(-transform.forward * thrustForcerevers_wasd, ForceMode.Force);
             Wtime -= Time.deltaTime;
             Debug.Log("後ろ方向に噴射中");
-        }
-
-        if (rb.linearVelocity.z <= 0.0f && !(rb.linearVelocity.z >= 0.0f))  // stop
-        {
-            Movestatus = MoveStatus.MoveStop;
-            rb.linearVelocity = new Vector3(0, 0, 0);  // このままだとすべての速度が止まるので、第一引数と第三引数に変数に格納した速度を入れる...WASDの逆噴射コード作成時に変更予定
+            if (rb.linearVelocity.z <= 0.0f)  // stop
+            {
+                Movestatus = MoveStatus.MoveStop;
+                rb.linearVelocity = new Vector3(0, 0, 0);  // このままだとすべての速度が止まるので、第一引数と第三引数に変数に格納した速度を入れる...WASDの逆噴射コード作成時に変更予定
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -88,31 +87,31 @@ public class characterBox : MonoBehaviour
         //===================================================
         if (Movestatus == MoveStatus.MoveRight)
         {
-            rb.AddForce(Vector3.right * thrustForcemove, ForceMode.Force);  // Right
+            rb.AddForce(transform.right * thrustForcemove, ForceMode.Force);  // Right
             Dtime += Time.deltaTime;
             Debug.Log("右に噴射中");
         }
 
         if (Movestatus == MoveStatus.MoveRightReverse)
         {
-            rb.AddForce(Vector3.left * thrustForcerevers_wasd, ForceMode.Force);  // Right_Reverse
+            rb.AddForce(-transform.right * thrustForcerevers_wasd, ForceMode.Force);  // Right_Reverse
             Dtime -= Time.deltaTime;
             Debug.Log("左に噴射中");
+            
+            if (rb.linearVelocity.x <= 0.0f)
+            {
+                Movestatus = MoveStatus.MoveStop;
+                rb.linearVelocity = new Vector3(0, 0, 0);
+            }
         }
-
-        if (rb.linearVelocity.x <= 0.0f && !(rb.linearVelocity.x >= 0.0f)) // stop
-        {
-            Movestatus = MoveStatus.MoveStop;
-            rb.linearVelocity = new Vector3(0, 0, 0);
-        }
-
+        
         if (Input.GetKeyDown(KeyCode.D))
         {
             Movestatus = MoveStatus.MoveRight;
         }
 
         if (Input.GetKeyUp(KeyCode.D))
-        {
+        { 
             Movestatus = MoveStatus.MoveRightReverse;
         }
 
@@ -121,21 +120,23 @@ public class characterBox : MonoBehaviour
         // ==================================================
         if (Movestatus == MoveStatus.MoveLeft)
         {
-            rb.AddForce(Vector3.left * thrustForcemove, ForceMode.Force);
+            rb.AddForce(-transform.right * thrustForcemove, ForceMode.Force);
             Debug.Log("左に噴射中");
         }
 
         if (Movestatus == MoveStatus.MoveLeftReverse)
         {
-            rb.AddForce(Vector3.right * thrustForcerevers_wasd, ForceMode.Force);
+            rb.AddForce(transform.right * thrustForcerevers_wasd, ForceMode.Force);
             Debug.Log("右に噴射中");
+            
+            if (rb.linearVelocity.x >= 0.0f) 
+            {
+                Movestatus = MoveStatus.MoveStop;
+                rb.linearVelocity = new Vector3(0, 0, 0);
+            }
         }
 
-        if (rb.linearVelocity.x >= 0.0f && !(rb.linearVelocity.x <= 0.0f) && !(Dtime >= 0)) 
-        {
-            Movestatus = MoveStatus.MoveStop;
-            rb.linearVelocity = new Vector3(0, 0, 0);
-        }
+       
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -166,9 +167,7 @@ public class characterBox : MonoBehaviour
             Debug.Log("下方向に噴射中");
         }
 
-        if (JumpTime <= 0 && rb.linearVelocity.y <= 0.0f &&
-            Jumpstatus !=
-            JumpStatus.JumpAccelerate) //どうしても0～-1の間になってしまう。低速になったらrb.linearVelocityを0にするか、y+方向に小さい力を加えるかで対策できる可能性.....
+        if (JumpTime <= 0 && rb.linearVelocity.y <= 0.0f && Jumpstatus != JumpStatus.JumpAccelerate)
         {
             Jumpstatus = JumpStatus.JumpStop;
             //Debug.Log("噴射を停止");
