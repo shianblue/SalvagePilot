@@ -8,6 +8,7 @@ public class characterBox : MonoBehaviour
     [SerializeField] private float thrustForceUp; //上方向のスロットル
     [SerializeField] private float thrustForcedown; //下方向のスロットル
     [SerializeField] private float thrustForcerevers; //逆噴射のパワー
+    
     [SerializeField] private float thrustForcemove;
     [SerializeField] private float thrustForcerevers_wasd;
 
@@ -26,15 +27,18 @@ public class characterBox : MonoBehaviour
 
     public Rigidbody rb;
 
-    public enum JumpStatus
+    private enum JumpStatus
     {
         JumpNormal, //0
         JumpAccelerate, //1
-        JumpReverse, //2
+        JumpUpReverse, //2
         JumpStop, //3
+        JumpDownAccelerate,
+        JumpDownReverse,
+        
     }
 
-    public enum MoveStatus
+    private enum MoveStatus
     {
         MoveNormal, //0
         MoveForward, //1
@@ -116,7 +120,7 @@ public class characterBox : MonoBehaviour
         }
 
         // ==================================================
-        //                     MOVE_A    AとDは設計を考え直す必要アリ
+        //                     MOVE_A    
         // ==================================================
         if (Movestatus == MoveStatus.MoveLeft)
         {
@@ -129,7 +133,7 @@ public class characterBox : MonoBehaviour
             rb.AddForce(transform.right * thrustForcerevers_wasd, ForceMode.Force);
             Debug.Log("右に噴射中");
             
-            if (rb.linearVelocity.x >= 0.0f) 
+            if (rb.linearVelocity.x >= 0.0f)
             {
                 Movestatus = MoveStatus.MoveStop;
                 rb.linearVelocity = new Vector3(0, 0, 0);
@@ -151,48 +155,62 @@ public class characterBox : MonoBehaviour
 
     public void jump()
     {
-        //Debug.Log(rb.linearVelocity.y);
-        Debug.Log(Jumpstatus);
-        if (Jumpstatus == JumpStatus.JumpAccelerate)
-        {
-            rb.AddForce(Vector3.up * thrustForceUp, ForceMode.Force);
-            JumpTime += Time.deltaTime;
-            Debug.Log("上方向に噴射中");
-        }
-
-        if (Jumpstatus == JumpStatus.JumpReverse)
-        {
-            rb.AddForce(Vector3.down * thrustForcedown, ForceMode.Force);
-            JumpTime -= Time.deltaTime;
-            Debug.Log("下方向に噴射中");
-        }
-
-        if (JumpTime <= 0 && rb.linearVelocity.y <= 0.0f && Jumpstatus != JumpStatus.JumpAccelerate)
-        {
-            Jumpstatus = JumpStatus.JumpStop;
-            //Debug.Log("噴射を停止");
-            if (rb.linearVelocity.y <= 0.0f && !(rb.linearVelocity.y >= 0.0f))
-            {
-                rb.linearVelocity =
-                    new Vector3(0, 0, 0); //このままだとすべての速度が止まるので、第一引数と第三引数に変数に格納した速度を入れる...WASDの逆噴射コード作成時に変更予定
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (JumpTime <= 0)
-            {
-                Jumpstatus = JumpStatus.JumpNormal;
-            }
-
             Jumpstatus = JumpStatus.JumpAccelerate;
             //Debug.Log("downspace");
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            Jumpstatus = JumpStatus.JumpReverse;
-            //Debug.Log("upspace");
+            Jumpstatus = JumpStatus.JumpUpReverse;
+            Debug.Log("upspace");
         }
-    }
+        //Debug.Log(rb.linearVelocity.y);
+        Debug.Log(Jumpstatus);
+        if (Jumpstatus == JumpStatus.JumpAccelerate)
+        {
+            rb.AddForce(Vector3.up * thrustForceUp, ForceMode.Force);
+            Debug.Log("上方向に噴射中");
+        }
+
+        else if (Jumpstatus == JumpStatus.JumpUpReverse)
+        {
+            rb.AddForce(Vector3.down * thrustForcerevers, ForceMode.Force);
+            Debug.Log("下方向に噴射中");
+            if (rb.linearVelocity.y <= 0.0f)
+            {
+                Jumpstatus = JumpStatus.JumpStop;
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            }
+        }
+        // ==================================================
+        //                     MOVE_DOWN
+        // ==================================================
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Jumpstatus = JumpStatus.JumpDownAccelerate;
+        }
+
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            Jumpstatus = JumpStatus.JumpDownReverse;
+        }
+
+        if (Jumpstatus == JumpStatus.JumpDownAccelerate)
+        {
+            rb.AddForce(Vector3.down * thrustForcedown, ForceMode.Force);
+        }
+
+        else if (Jumpstatus == JumpStatus.JumpDownReverse)
+        {
+            rb.AddForce(Vector3.up * thrustForcerevers, ForceMode.Force);
+            if (rb.linearVelocity.y >= 0.0f)
+            {
+                Jumpstatus = JumpStatus.JumpStop;
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            }
+        }
+        
+    }   
 }
