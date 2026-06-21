@@ -48,6 +48,8 @@ public class characterBox : MonoBehaviour
         MoveLeftReverse, //5
         MoveRight, //6
         MoveRightReverse, //7
+        MoveBack, //8
+        MoveBackReverse, //9
     }
 
     void Start()
@@ -57,6 +59,17 @@ public class characterBox : MonoBehaviour
 
     public void move()
     {
+        
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Movestatus = MoveStatus.MoveForward;
+        }
+
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            Movestatus = MoveStatus.MoveForwardReverse;
+        }
+        
         if (Movestatus == MoveStatus.MoveForward)  // forward
         {
             rb.AddForce(transform.forward * thrustForcemove, ForceMode.Force);  // 試験的にtransform.forwardに変更
@@ -72,56 +85,83 @@ public class characterBox : MonoBehaviour
             if (rb.linearVelocity.z <= 0.0f)  // stop
             {
                 Movestatus = MoveStatus.MoveStop;
-                rb.linearVelocity = new Vector3(0, 0, 0);  // このままだとすべての速度が止まるので、第一引数と第三引数に変数に格納した速度を入れる...WASDの逆噴射コード作成時に変更予定
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, 0);  // このままだと前進中に一瞬sを押すとz軸の速度が0になるので調整予定(A,DキーSPACE,Cキーも同様)
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Movestatus = MoveStatus.MoveForward;
-        }
-
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            Movestatus = MoveStatus.MoveForwardReverse;
         }
 
         //===================================================
         //                    MOVE_D
         //===================================================
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Movestatus = MoveStatus.MoveBack;
+        }
+
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            Movestatus = MoveStatus.MoveBackReverse;
+        }
+
+        if (Movestatus == MoveStatus.MoveBack)
+        {
+            rb.AddForce(-transform.forward * thrustForcemove, ForceMode.Force);
+        }
+
+        if (Movestatus == MoveStatus.MoveBackReverse)
+        {
+            rb.AddForce(transform.forward * thrustForcerevers, ForceMode.Force);
+            if (rb.linearVelocity.z >= 0.0f)
+            {
+                Movestatus = MoveStatus.MoveStop;
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, 0);
+            }
+        }
+        
+        //===================================================
+        //                    MOVE_D
+        //===================================================
+        
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Movestatus = MoveStatus.MoveRight;
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        { 
+            Movestatus = MoveStatus.MoveRightReverse;
+        }
+        
         if (Movestatus == MoveStatus.MoveRight)
         {
             rb.AddForce(transform.right * thrustForcemove, ForceMode.Force);  // Right
-            Dtime += Time.deltaTime;
             Debug.Log("右に噴射中");
         }
 
         if (Movestatus == MoveStatus.MoveRightReverse)
         {
             rb.AddForce(-transform.right * thrustForcerevers_wasd, ForceMode.Force);  // Right_Reverse
-            Dtime -= Time.deltaTime;
             Debug.Log("左に噴射中");
             
             if (rb.linearVelocity.x <= 0.0f)
             {
                 Movestatus = MoveStatus.MoveStop;
-                rb.linearVelocity = new Vector3(0, 0, 0);
+                rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, rb.linearVelocity.z);
             }
-        }
-        
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Movestatus = MoveStatus.MoveRight;
-        }
-
-        if (Input.GetKeyUp(KeyCode.D))
-        { 
-            Movestatus = MoveStatus.MoveRightReverse;
         }
 
         // ==================================================
         //                     MOVE_A    
         // ==================================================
+        
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Movestatus = MoveStatus.MoveLeft;
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            Movestatus = MoveStatus.MoveLeftReverse;
+        }
+        
         if (Movestatus == MoveStatus.MoveLeft)
         {
             rb.AddForce(-transform.right * thrustForcemove, ForceMode.Force);
@@ -136,20 +176,8 @@ public class characterBox : MonoBehaviour
             if (rb.linearVelocity.x >= 0.0f)
             {
                 Movestatus = MoveStatus.MoveStop;
-                rb.linearVelocity = new Vector3(0, 0, 0);
+                rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, rb.linearVelocity.z);
             }
-        }
-
-       
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Movestatus = MoveStatus.MoveLeft;
-        }
-
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            Movestatus = MoveStatus.MoveLeftReverse;
         }
     }
 
@@ -211,6 +239,5 @@ public class characterBox : MonoBehaviour
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             }
         }
-        
     }   
 }
