@@ -1084,9 +1084,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 4.7674904, y: 32.233654, z: 4.5226264}
+    m_Target: {x: 30.87838, y: 42.056248, z: -0.3750679}
     speed: 2
-    m_Value: {x: 4.7674904, y: 32.233654, z: 4.5226264}
+    m_Value: {x: 30.87838, y: 42.056248, z: -0.3750679}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1132,9 +1132,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.25543767, y: -0.5852798, z: 0.20129277, w: -0.74297667}
+    m_Target: {x: -0.28947982, y: 0.018075112, z: -0.0054457304, w: -0.9571757}
     speed: 2
-    m_Value: {x: 0.25543767, y: 0.5852798, z: -0.20129277, w: 0.74297667}
+    m_Value: {x: -0.28947982, y: 0.018075112, z: -0.0054457304, w: -0.9571756}
   m_Size:
     m_Target: 12.124355
     speed: 2
@@ -1395,7 +1395,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/script
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/script
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\UnityProject\SpaceBattleShip
   m_LockTracker:
@@ -1414,12 +1414,12 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 45962
+    - m_Data: 46076
     m_LastClickedID:
-      m_Data: 45962
+      m_Data: 46076
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 45962
+    - m_Data: 45984
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1452,7 +1452,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 45962
+    - m_Data: 45984
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: []
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0

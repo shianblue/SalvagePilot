@@ -220,7 +220,7 @@ public class characterBox : MonoBehaviour
             Jumpstatus = JumpStatus.JumpDownAccelerate;
         }
 
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.C) && Jumpstatus == JumpStatus.JumpDownAccelerate)
         {
             Jumpstatus = JumpStatus.JumpDownReverse;
         }
