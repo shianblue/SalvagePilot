@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -1084,9 +1084,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 19.717922, y: 29.145672, z: 1.639623}
+    m_Target: {x: 15.187376, y: 32.73601, z: -2.0385714}
     speed: 2
-    m_Value: {x: 19.717922, y: 29.145672, z: 1.639623}
+    m_Value: {x: 15.187376, y: 32.73601, z: -2.0385714}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1132,9 +1132,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.38924542, y: 0.31657293, z: -0.14453767, w: -0.85308695}
+    m_Target: {x: -0.5068298, y: 0.14956874, z: -0.089907244, w: -0.8444243}
     speed: 2
-    m_Value: {x: -0.38924542, y: 0.31657293, z: -0.14453767, w: -0.85308695}
+    m_Value: {x: -0.5068298, y: 0.14956874, z: -0.08990725, w: -0.8444243}
   m_Size:
     m_Target: 6.052691
     speed: 2
@@ -1320,8 +1320,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -1296
-      - m_Data: 45648
+      - m_Data: -1298
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1415,12 +1414,12 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 46066
+    - m_Data: 46074
     m_LastClickedID:
-      m_Data: 46066
+      m_Data: 46074
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 45974
+    - m_Data: 45982
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1453,7 +1452,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 45974
+    - m_Data: 45982
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1480,9 +1479,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs:
+    - m_Data: 19852
+    m_LastClickedInstanceID: 19852
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
