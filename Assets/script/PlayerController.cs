@@ -1,14 +1,19 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float thrustForceUp; //上方向のスロットル
     [SerializeField] private float thrustForceDown; //下方向のスロットル
     [SerializeField] private float thrustForceRevers; //逆噴射のパワー
     
-    [SerializeField] private float thrustForceMove;
+    [SerializeField] public float thrustForceMove;
     [SerializeField] private float thrustForceReversMove;
     
     public Rigidbody rb;
+    
+    [SerializeField] private Slider slider;
+    
 
     public float time;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,6 +25,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        thrustForceMove = slider.value;
+        Debug.Log(thrustForceMove);
         Move();
         //Debug.Log(wsValue);
     }
