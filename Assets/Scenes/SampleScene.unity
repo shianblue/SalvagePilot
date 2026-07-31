@@ -1056,9 +1056,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ad1df2df735bb418c9bd37d62cc46a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
-  thrustForceUp: 500
-  thrustForceDown: 500
-  thrustForceRevers: 500
+  thrustForceY: 250
+  thrustForceRevers: 250
   thrustForceMove: 500
   thrustForceReversMove: 125
   thrustForceTorque: 75

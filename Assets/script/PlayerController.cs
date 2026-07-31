@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float thrustForceUp; //上方向のスロットル
-    [SerializeField] private float thrustForceDown; //下方向のスロットル
+    [SerializeField] private float thrustForceY; //Y軸のスロットル....UIでのスロットル操作を分けるためにMoveと分割。統一したほうが自然か
     [SerializeField] private float thrustForceRevers; //逆噴射のパワー
     
     [SerializeField] public float thrustForceMove;
@@ -33,7 +32,6 @@ public class PlayerController : MonoBehaviour
 
     private void Move()//WASDの操作
     {
-        int spcValue = 0;
         //==========================================
         //                MOVE_W/S
         //==========================================
@@ -109,7 +107,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Mathf.Abs(qeDot) > 0.1f)
         {
-            rb.AddTorque(transform.up*(thrustForceTorque * -Mathf.Sign(qeDot)), ForceMode.Force);
+            rb.AddTorque(transform.up * (thrustForceTorque * -Mathf.Sign(qeDot)), ForceMode.Force);
         }
         else
         {
@@ -119,6 +117,28 @@ public class PlayerController : MonoBehaviour
         //==========================================
         //              MOVE_SPACE/C
         //==========================================
-        
+        int spcValue = 0;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            spcValue += 1;
+        }
+        if (Input.GetKey(KeyCode.C))
+        {
+            spcValue -= 1;
+        }
+
+        if (spcValue != 0)
+        {
+            rb.AddForce(transform.up * (spcValue * thrustForceY), ForceMode.Force);
+        }
+        else if (Mathf.Abs(rb.linearVelocity.y) > 0.1f)
+        {
+            rb.AddForce(-transform.up * (thrustForceRevers * Mathf.Sign(rb.linearVelocity.y)), ForceMode.Force);
+            //条件と実行内容にlinearVelocityを入れているが、X軸のRotateを追加するなら変更の必要あり
+        }
+        else
+        {
+            rb.angularVelocity -= transform.up * spcValue;
+        }
     }
 }
