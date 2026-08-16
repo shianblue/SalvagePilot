@@ -90,7 +90,7 @@ public class characterBox : MonoBehaviour
         }
 
         //===================================================
-        //                    MOVE_D
+        //                    MOVE_S
         //===================================================
 
         if (Input.GetKeyDown(KeyCode.S))
