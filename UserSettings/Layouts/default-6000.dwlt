@@ -142,7 +142,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 974
+    width: 972
     height: 924
   m_MinSize: {x: 100, y: 112}
   m_MaxSize: {x: 8096, y: 16192}
@@ -166,7 +166,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 974
+    width: 972
     height: 471
   m_MinSize: {x: 201, y: 226}
   m_MaxSize: {x: 4001, y: 4026}
@@ -192,7 +192,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 471
-    width: 974
+    width: 972
     height: 453
   m_MinSize: {x: 201, y: 226}
   m_MaxSize: {x: 4001, y: 4026}
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 974
+    x: 972
     y: 0
     width: 236
     height: 924
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1210
+    x: 1208
     y: 0
     width: 261
     height: 924
@@ -268,9 +268,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1471
+    x: 1469
     y: 0
-    width: 447
+    width: 449
     height: 924
   m_MinSize: {x: 276, y: 76}
   m_MaxSize: {x: 4001, y: 4026}
@@ -568,7 +568,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 24
-    width: 973
+    width: 971
     height: 445
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1084,9 +1084,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 8.269017, y: 28.37076, z: 100.15674}
+    m_Target: {x: 59.641884, y: 20.905153, z: 31.558483}
     speed: 2
-    m_Value: {x: 8.269017, y: 28.37076, z: 100.15674}
+    m_Value: {x: 59.641884, y: 20.905153, z: 31.558483}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1132,13 +1132,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.032412652, y: -0.02658536, z: -0.00024611404, w: 0.9993238}
+    m_Target: {x: -0.035793737, y: -0.5516753, z: 0.02308233, w: -0.83318067}
     speed: 2
-    m_Value: {x: 0.03241265, y: 0.026585357, z: 0.00024611404, w: -0.9993237}
+    m_Value: {x: 0.035793737, y: 0.5516753, z: -0.02308233, w: 0.83318067}
   m_Size:
-    m_Target: 2.0511246
+    m_Target: 12.124355
     speed: 2
-    m_Value: 2.0511246
+    m_Value: 12.124355
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1195,7 +1195,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 495
-    width: 973
+    width: 971
     height: 427
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1252,23 +1252,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 973
+      width: 971
       height: 406
     m_Scale: {x: 0.37592593, y: 0.37592593}
-    m_Translation: {x: 486.5, y: 203}
+    m_Translation: {x: 485.49997, y: 203}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1294.138
+      x: -1291.4778
       y: -540
-      width: 2588.276
+      width: 2582.9556
       height: 1080
     m_MinimalGUI: 1
   m_defaultScale: 0.37592593
-  m_LastWindowPixelSize: {x: 973, y: 427}
+  m_LastWindowPixelSize: {x: 971, y: 427}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -1296,7 +1296,7 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 975
+    x: 973
     y: 24
     width: 234
     height: 898
@@ -1338,7 +1338,7 @@ MonoBehaviour:
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
-        m_ClientGUIView: {fileID: 10}
+        m_ClientGUIView: {fileID: 3}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1367,7 +1367,7 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1211
+    x: 1209
     y: 24
     width: 259
     height: 898
@@ -1395,7 +1395,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/script
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/script
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\UnityProject\SpaceBattleShip
   m_LockTracker:
@@ -1414,14 +1414,13 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 46154
+    - m_Data: 46090
     m_LastClickedID:
-      m_Data: 46154
+      m_Data: 46090
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 46052
-    - m_Data: 46054
-    - m_Data: 46056
+    - m_Data: 46090
+    - m_Data: 46092
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1454,9 +1453,8 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 46052
-    - m_Data: 46054
-    - m_Data: 46056
+    - m_Data: 46090
+    - m_Data: 46092
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1485,7 +1483,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: []
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1512,7 +1510,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 472}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 138
@@ -1537,9 +1535,9 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1472
+    x: 1470
     y: 24
-    width: 446
+    width: 448
     height: 898
   m_SerializedDataModeController:
     m_DataMode: 0

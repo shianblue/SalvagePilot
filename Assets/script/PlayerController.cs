@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.angularVelocity -= transform.up * spcValue;
+            rb.linearVelocity -= transform.up * rb.linearVelocity.y;
         }
     }
 }
