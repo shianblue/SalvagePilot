@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Mathf.Abs(qeDot) > 0.1f)
         {
-            rb.AddTorque(transform.up * (thrustForceTorque * -Mathf.Sign(qeDot)), ForceMode.Force);
+            rb.AddTorque(transform.up * (thrustForceReversTorque * -Mathf.Sign(qeDot)), ForceMode.Force);
         }
         else
         {

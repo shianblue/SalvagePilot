@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Delivery : MonoBehaviour
 {
-    private enum DeliveryStatus
+    public enum DeliveryStatus
     {
         WaitingForPickup,
         Carrying,
