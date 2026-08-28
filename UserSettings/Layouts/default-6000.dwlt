@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -1084,9 +1084,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 127.16687, y: 240.04727, z: -619.6412}
+    m_Target: {x: 133.2518, y: 249.52692, z: -625.0838}
     speed: 2
-    m_Value: {x: 127.16687, y: 240.04727, z: -619.6412}
+    m_Value: {x: 133.2518, y: 249.52692, z: -625.0838}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1132,9 +1132,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0636601, y: -0.07491681, z: -0.0052485536, w: -0.99532163}
+    m_Target: {x: 0.2610686, y: -0.23180424, z: -0.06524865, w: -0.93499374}
     speed: 2
-    m_Value: {x: 0.0636601, y: -0.0749168, z: -0.005248553, w: -0.99532163}
+    m_Value: {x: 0.2610686, y: -0.23180422, z: -0.065248646, w: -0.9349937}
   m_Size:
     m_Target: 12.124355
     speed: 2
@@ -1320,12 +1320,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -8508
-      - m_Data: -1296
-      - m_Data: 45696
-      - m_Data: 47034
-      - m_Data: 47058
-      - m_Data: 47178
+      - m_Data: -1348
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1400,7 +1395,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Fonts
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1410,7 +1405,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Fonts
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\UnityProject\SpaceBattleShip
   m_LockTracker:
@@ -1419,13 +1414,13 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 46200
+    - m_Data: 46478
     m_LastClickedID:
-      m_Data: 46200
+      m_Data: 46478
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 46092
-    - m_Data: 46094
+    - m_Data: 46108
+    - m_Data: 46110
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1458,8 +1453,8 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 46092
-    - m_Data: 46094
+    - m_Data: 46108
+    - m_Data: 46110
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1515,7 +1510,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 556}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 138
