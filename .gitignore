@@ -4,7 +4,6 @@
 # Jetbrain Rider Cache
 .idea/
 Assets/Plugins/Editor/JetBrains*
-
 # Visual Studio Code
 .vscode/
 
@@ -17,6 +16,11 @@ Assets/Plugins/Editor/JetBrains*
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
+Assets/Evo/
+Assets/Evo.meta
+Assets/Retora - Modular Space Ship Pack/
+Assets/Retora - Modular Space Ship Pack.meta
+
 
 # Visual Studio cache directory
 .vs/
