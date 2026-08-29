@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Evo.UI;
+using Slider = Evo.UI.Slider;
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float thrustForceY; //Y軸のスロットル....UIでのスロットル操作を分けるためにMoveと分割。統一したほうが自然か
@@ -13,7 +16,8 @@ public class PlayerController : MonoBehaviour
     
     public Rigidbody rb;
     
-    [SerializeField] private Slider slider;
+    public RadialSlider slider;
+    
     
 
     public float time;
@@ -26,8 +30,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        thrustForceMove = slider.value;
+        thrustForceMove = slider.Value;
+        thrustForceY = slider.Value;
         Move();
+        Debug.Log(slider.Value);
     }
 
     private void Move()//WASDの操作
