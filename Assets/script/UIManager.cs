@@ -29,19 +29,16 @@ public class UIManager : MonoBehaviour
         switch (_goals)
         {
             case Goals.Phase1:
-                goalsStatusText.text = "目標:ドローンを追う";//プレイヤーの誘導をUI依存にするのかドローンを出してtailで追わせるのか決めてないのでどっちでも
+                goalsStatusText.text = "目標:マーカーへ向かう";
                 break;
             case Goals.Phase2:
-                goalsStatusText.text = "目標:デブリを探す";//これもどうなるかわからないの変更があれば変わる
+                goalsStatusText.text = "目標:破片を回収する";
                 break;
             case Goals.Phase3:
-                goalsStatusText.text = "目標:デブリを回収する(Fボタン)";
+                goalsStatusText.text = "目標:受け渡し地点へ向かう";
                 break;
             case Goals.Phase4:
-                goalsStatusText.text = "目標:回収地点へ向かう";
-                break;
-            case Goals.Phase5:
-                goalsStatusText.text = "目標:デブリを降ろす(Fボタン)";
+                goalsStatusText.text = "目標:破片を降ろす";
                 break;
         }
     }

@@ -13,9 +13,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float thrustForceTorque;
     [SerializeField] private float reversedThrustForceTorque;
+
+    [SerializeField] private ParticleSystem mainEngine;
+    [SerializeField] private ParticleSystem subEngineRight;
+    [SerializeField] private ParticleSystem subEngineLeft;
     
     public Rigidbody rb;
-    
     public RadialSlider slider;
     
     
@@ -55,7 +58,7 @@ public class PlayerController : MonoBehaviour
         {
             wsValue -= 1;
         }
-
+        
         if (wsValue != 0)
         {
             rb.AddForce(transform.forward * (wsValue * thrustForceMove), ForceMode.Force);
@@ -109,7 +112,17 @@ public class PlayerController : MonoBehaviour
         {
             qeValue += 1;
         }
+        
+        bool isThrusting = wsValue == 1 && thrustForceMove >= 1;
 
+        bool mainActive = isThrusting;
+        bool subLeftActive = wsValue > 0 && isThrusting|| qeValue > 0;
+        bool subRightActive = wsValue > 0 && isThrusting|| qeValue < 0;
+        
+        EngineEffect(mainEngine, mainActive);
+        EngineEffect(subEngineRight, subRightActive);
+        EngineEffect(subEngineLeft, subLeftActive);
+        
         if (qeValue != 0)
         {
             rb.AddTorque(transform.up * (qeValue * thrustForceTorque), ForceMode.Force);
@@ -148,6 +161,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.linearVelocity -= transform.up * rb.linearVelocity.y;
+        }
+    }
+    void EngineEffect(ParticleSystem ps,bool isActive)
+    {
+        if (isActive && !ps.isEmitting)
+        {
+            ps.Play(true);
+        }
+        else if (!isActive && ps.isEmitting)
+        {
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         }
     }
 }
