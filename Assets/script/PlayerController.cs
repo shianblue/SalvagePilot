@@ -9,10 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float thrustForceRevers; //逆噴射のパワー
     
     [SerializeField] public float thrustForceMove;
-    [SerializeField] private float thrustForceReversMove;
+    [SerializeField] private float reversedThrustForceMove;
 
     [SerializeField] private float thrustForceTorque;
-    [SerializeField] private float thrustForceReversTorque;
+    [SerializeField] private float reversedThrustForceTorque;
     
     public Rigidbody rb;
     
@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
     private void Move()//WASDの操作
     {
+        float linearBrakeStep = (reversedThrustForceMove / rb.mass) * Time.fixedDeltaTime;
+        float verticalBrakeStep = (thrustForceRevers / rb.mass) * Time.fixedDeltaTime;
+        float angularBrakeStep = (reversedThrustForceTorque / rb.inertiaTensor.y) * Time.fixedDeltaTime;
         //==========================================
         //                MOVE_W/S
         //==========================================
@@ -57,9 +60,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.forward * (wsValue * thrustForceMove), ForceMode.Force);
         }
-        else if (Mathf.Abs(forwardDot) > 0.1f)
+        else if (Mathf.Abs(forwardDot) > linearBrakeStep)
         {
-            rb.AddForce(-transform.forward *(thrustForceReversMove * Mathf.Sign(forwardDot)), ForceMode.Force);
+            rb.AddForce(-transform.forward *(reversedThrustForceMove * Mathf.Sign(forwardDot)), ForceMode.Force);
         }
         else
         {
@@ -84,9 +87,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.right * (adValue * thrustForceMove), ForceMode.Force);
         }
-        else if (Mathf.Abs(rlDot) > 0.1f)
+        else if (Mathf.Abs(rlDot) > linearBrakeStep)
         {
-            rb.AddForce(transform.right * (thrustForceReversMove * -Mathf.Sign(rlDot)), ForceMode.Force);
+            rb.AddForce(transform.right * (reversedThrustForceMove * -Mathf.Sign(rlDot)), ForceMode.Force);
         }
         else
         {
@@ -111,9 +114,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddTorque(transform.up * (qeValue * thrustForceTorque), ForceMode.Force);
         }
-        else if (Mathf.Abs(qeDot) > 0.1f)
+        else if (Mathf.Abs(qeDot) > angularBrakeStep)
         {
-            rb.AddTorque(transform.up * (thrustForceReversTorque * -Mathf.Sign(qeDot)), ForceMode.Force);
+            rb.AddTorque(transform.up * (reversedThrustForceTorque * -Mathf.Sign(qeDot)), ForceMode.Force);
         }
         else
         {
@@ -137,7 +140,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * (spcValue * thrustForceY), ForceMode.Force);
         }
-        else if (Mathf.Abs(rb.linearVelocity.y) > 0.1f)
+        else if (Mathf.Abs(rb.linearVelocity.y) > verticalBrakeStep)
         {
             rb.AddForce(-transform.up * (thrustForceRevers * Mathf.Sign(rb.linearVelocity.y)), ForceMode.Force);
             //条件と実行内容にlinearVelocityを入れているが、X軸のRotateを追加するなら変更の必要あり
