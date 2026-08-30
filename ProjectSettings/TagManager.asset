@@ -8,6 +8,7 @@ TagManager:
   - PickupZone
   - DeliveryZone
   - test
+  - Target
   layers:
   - Default
   - TransparentFX

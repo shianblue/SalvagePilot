@@ -1,10 +1,11 @@
 using UnityEngine;
 using TMPro;
+using Evo.UI;
 public class UIManager : MonoBehaviour
 {
     private Delivery.DeliveryStatus _deliveryStatus;
-    public TextMeshProUGUI statusText;
     public TextMeshProUGUI goalsStatusText;
+    [SerializeField] private Notification hintNotification;
 
     private enum Goals
     {
@@ -25,24 +26,39 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        statusText.text = $"Status: {_deliveryStatus}";
         switch (_goals)
         {
             case Goals.Phase1:
-                goalsStatusText.text = "ドローンを追う";//プレイヤーの誘導をUI依存にするのかドローンを出してtailで追わせるのか決めてないのでどっちでも
+                goalsStatusText.text = "目標:ドローンを追う";//プレイヤーの誘導をUI依存にするのかドローンを出してtailで追わせるのか決めてないのでどっちでも
                 break;
             case Goals.Phase2:
-                goalsStatusText.text = "デブリを探す";//これもどうなるかわからないの変更があれば変わる
+                goalsStatusText.text = "目標:デブリを探す";//これもどうなるかわからないの変更があれば変わる
                 break;
             case Goals.Phase3:
-                goalsStatusText.text = "デブリを回収する(Fボタン)";
+                goalsStatusText.text = "目標:デブリを回収する(Fボタン)";
                 break;
             case Goals.Phase4:
-                goalsStatusText.text = "回収地点へ向かう";
+                goalsStatusText.text = "目標:回収地点へ向かう";
                 break;
             case Goals.Phase5:
-                goalsStatusText.text = "デブリを降ろす(Fボタン)";
+                goalsStatusText.text = "目標:デブリを降ろす(Fボタン)";
                 break;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Target"))
+        {
+            hintNotification.Open();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Target"))
+        {
+            hintNotification.Close();
         }
     }
 }
