@@ -9,6 +9,7 @@ TagManager:
   - DeliveryZone
   - test
   - Target
+  - Target2
   layers:
   - Default
   - TransparentFX

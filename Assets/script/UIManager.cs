@@ -1,11 +1,14 @@
 using UnityEngine;
 using TMPro;
 using Evo.UI;
+
 public class UIManager : MonoBehaviour
 {
     private Delivery.DeliveryStatus _deliveryStatus;
     public TextMeshProUGUI goalsStatusText;
     [SerializeField] private Notification hintNotification;
+    [SerializeField] private OffScreenIndicator indicatorPoint1;
+    [SerializeField] private OffScreenIndicator indicatorPoint2;
 
     private enum Goals
     {
@@ -15,17 +18,39 @@ public class UIManager : MonoBehaviour
         Phase4,
         Phase5
     }
-
     private Goals _goals;
+    private enum Zone
+    {
+        None,
+        Point1,
+        Point2
+    }
+    private Zone _zone;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        SetPhase(Goals.Phase1);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (_zone == Zone.Point1 && _goals == Goals.Phase2)
+            {
+                SetPhase(Goals.Phase3);
+            }
+            if (_zone == Zone.Point2 && _goals == Goals.Phase4)
+            {
+                SetPhase(Goals.Phase5);
+            }
+        }
+    }
+
+    private void SetPhase(Goals newPhase)
+    {
+        _goals = newPhase;
         switch (_goals)
         {
             case Goals.Phase1:
@@ -40,21 +65,43 @@ public class UIManager : MonoBehaviour
             case Goals.Phase4:
                 goalsStatusText.text = "目標:破片を降ろす";
                 break;
+            case Goals.Phase5:
+                goalsStatusText.text = "ミッション完了";
+                break;
         }
+        indicatorPoint1.enabled = (newPhase == Goals.Phase1 || newPhase == Goals.Phase2);
+        indicatorPoint2.enabled = (newPhase == Goals.Phase3 || newPhase == Goals.Phase4);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Target"))
         {
+            _zone = Zone.Point1;
+            hintNotification.Description = "Press [F] to pick up";
             hintNotification.Open();
+            if (_goals == Goals.Phase1)
+            {
+                SetPhase(Goals.Phase2);
+            }
+        }
+        else if (other.CompareTag("Target2"))
+        {
+            _zone = Zone.Point2;
+            hintNotification.Description = "Press [F] to drop off";
+            hintNotification.Open();
+            if (_goals == Goals.Phase3)
+            {
+                SetPhase(Goals.Phase4);
+            }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Target"))
+        if (other.CompareTag("Target") || other.CompareTag("Target2"))
         {
+            _zone = Zone.None;
             hintNotification.Close();
         }
     }

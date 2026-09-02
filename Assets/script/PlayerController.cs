@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Evo.UI;
-using Slider = Evo.UI.Slider;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,7 +35,6 @@ public class PlayerController : MonoBehaviour
         thrustForceMove = slider.Value;
         thrustForceY = slider.Value;
         Move();
-        Debug.Log(slider.Value);
     }
 
     private void Move()//WASDの操作
