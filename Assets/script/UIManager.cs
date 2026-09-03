@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using Evo.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Notification hintNotification;
     [SerializeField] private OffScreenIndicator indicatorPoint1;
     [SerializeField] private OffScreenIndicator indicatorPoint2;
-
+    [SerializeField] private GameObject missionCompletePanel;
     private enum Goals
     {
         Phase1,
@@ -30,6 +31,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         SetPhase(Goals.Phase1);
+        missionCompletePanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -67,10 +69,21 @@ public class UIManager : MonoBehaviour
                 break;
             case Goals.Phase5:
                 goalsStatusText.text = "ミッション完了";
+                missionCompletePanel.SetActive(true);
                 break;
         }
         indicatorPoint1.enabled = (newPhase == Goals.Phase1 || newPhase == Goals.Phase2);
         indicatorPoint2.enabled = (newPhase == Goals.Phase3 || newPhase == Goals.Phase4);
+    }
+
+    public void ReturnToTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
+    public void GotoTestMode()
+    {
+        SceneManager.LoadScene("testmode");
     }
 
     void OnTriggerEnter(Collider other)
@@ -96,7 +109,7 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-
+    
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Target") || other.CompareTag("Target2"))
