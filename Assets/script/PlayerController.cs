@@ -1,16 +1,14 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Evo.UI;
-using Slider = Evo.UI.Slider;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float thrustForceY; //Y軸のスロットル....UIでのスロットル操作を分けるためにMoveと分割。統一したほうが自然か
-    [SerializeField] private float thrustForceRevers; //逆噴射のパワー
-    [SerializeField] public float thrustForceMove;
+    [SerializeField] private float reversedThrustForce; //逆噴射のパワー
+    [SerializeField] private float thrustForceMove;
     [SerializeField] private float reversedThrustForceMove;
     [SerializeField] private float thrustForceTorque;
     [SerializeField] private float reversedThrustForceTorque;
+    [SerializeField] private float thrustForceY; //Y軸のスロットル....UIでのスロットル操作を分けるためにMoveと分割。
 
     [SerializeField] private ParticleSystem mainEngine;
     [SerializeField] private ParticleSystem subEngineRight;
@@ -21,22 +19,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Slider lateralSpeedSlider;
     [SerializeField] private Slider forwardSpeedSlider;
     [SerializeField] private Slider verticalSpeedSlider;
+    [SerializeField] private RadialSlider slider;
     
-    public Rigidbody rb;
-    public RadialSlider slider;
+    private Rigidbody rb;
     
-    public float lateralSpeed => Vector3.Dot(rb.linearVelocity, transform.right);
-    public float forwardSpeed => Vector3.Dot(rb.linearVelocity, transform.forward);
-    public float verticalSpeed => rb.linearVelocity.y;
-
-    public float time;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private float lateralSpeed => Vector3.Dot(rb.linearVelocity, transform.right);
+    private float forwardSpeed => Vector3.Dot(rb.linearVelocity, transform.forward);
+    private float verticalSpeed => rb.linearVelocity.y;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
     
-    // Update is called once per frame
     void FixedUpdate()
     {
         thrustForceMove = slider.Value;
@@ -44,10 +38,10 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    private void Move()//WASDの操作
+    private void Move()//全体の操作
     {
         float linearBrakeStep = (reversedThrustForceMove / rb.mass) * Time.fixedDeltaTime;
-        float verticalBrakeStep = (thrustForceRevers / rb.mass) * Time.fixedDeltaTime;
+        float verticalBrakeStep = (reversedThrustForce / rb.mass) * Time.fixedDeltaTime;
         float angularBrakeStep = (reversedThrustForceTorque / rb.inertiaTensor.y) * Time.fixedDeltaTime;
         //==========================================
         //                MOVE_W/S
@@ -130,7 +124,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.angularVelocity -= transform.up * qeDot;
         }
-        //X軸のROTATEを追加するかはステージ作成後決定
         //==========================================
         //              MOVE_SPACE/C
         //==========================================
@@ -150,7 +143,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Mathf.Abs(rb.linearVelocity.y) > verticalBrakeStep)
         {
-            rb.AddForce(-transform.up * (thrustForceRevers * Mathf.Sign(rb.linearVelocity.y)), ForceMode.Force);
+            rb.AddForce(-transform.up * (reversedThrustForce * Mathf.Sign(rb.linearVelocity.y)), ForceMode.Force);
             //条件と実行内容にlinearVelocityを入れているが、X軸のRotateを追加するなら変更の必要あり
         }
         else
@@ -162,22 +155,22 @@ public class PlayerController : MonoBehaviour
         //==========================================
         bool isThrusting = wsValue == 1 && thrustForceMove >= 1;
         bool mainActive = isThrusting;
-        bool subLeftActive = wsValue > 0 && isThrusting|| qeValue > 0;
-        bool subRightActive = wsValue > 0 && isThrusting|| qeValue < 0;
+        bool subLeftActive = isThrusting || qeValue > 0;
+        bool subRightActive = isThrusting || qeValue < 0;
         
         EngineEffect(mainEngine, mainActive);
         EngineEffect(subEngineRight, subRightActive);
         EngineEffect(subEngineLeft, subLeftActive);
         
-        float clampedForward = Mathf.Clamp(forwardSpeed,-maxSpeed,maxSpeed);
-        float clampedLateral = Mathf.Clamp(lateralSpeed,-maxSpeed,maxSpeed);
-        float clampedVertical = Mathf.Clamp(verticalSpeed,-maxSpeed,maxSpeed);
-        
-        lateralSpeedSlider.value = lateralSpeed;
-        forwardSpeedSlider.value = forwardSpeed;
-        verticalSpeedSlider.value = verticalSpeed;
+        float clampedForward = Mathf.Clamp(forwardSpeed, -maxSpeed, maxSpeed);
+        float clampedLateral = Mathf.Clamp(lateralSpeed, -maxSpeed, maxSpeed);
+        float clampedVertical = Mathf.Clamp(verticalSpeed, -maxSpeed, maxSpeed);
         
         rb.linearVelocity = transform.forward * clampedForward + transform.right * clampedLateral + Vector3.up * clampedVertical;
+        
+        lateralSpeedSlider.value = clampedLateral;
+        forwardSpeedSlider.value = clampedForward;
+        verticalSpeedSlider.value = clampedVertical;
     }
     void EngineEffect(ParticleSystem ps,bool isActive)
     {

@@ -3,28 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.Object scene;
-    [SerializeField] private UnityEngine.Object scene2;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void ChangeToMainGame()
     {
-        
+        SceneManager.LoadScene("MainGame");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeToSimModeScene()
     {
-        
+        SceneManager.LoadScene("SimMode");
     }
-
-    public void ChangeScene()
+    public void ChangeToMainMenuScene()
     {
-        SceneManager.LoadScene(scene.name);
-    }
-
-    public void ChangeScene2()
-    {
-        SceneManager.LoadScene(scene2.name);
+        SceneManager.LoadScene("Title");
     }
 
     public void QuitGame()

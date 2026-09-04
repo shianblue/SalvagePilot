@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public TextMeshProUGUI goalsStatusText;
+    [SerializeField] private TextMeshProUGUI goalsStatusText;
     [SerializeField] private OffScreenIndicator indicatorPoint1;
     [SerializeField] private OffScreenIndicator indicatorPoint2;
     [SerializeField] private GameObject missionCompletePanel;
@@ -29,14 +29,12 @@ public class UIManager : MonoBehaviour
         Point2
     }
     private Zone _zone;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SetPhase(Goals.Phase1);
         missionCompletePanel.SetActive(false);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -80,14 +78,14 @@ public class UIManager : MonoBehaviour
         indicatorPoint2.enabled = (newPhase == Goals.Phase3 || newPhase == Goals.Phase4);
     }
 
-    public void ReturnToTitle()
+    public void ChangeToTitle()
     {
         SceneManager.LoadScene("Title");
     }
 
-    public void GotoTestMode()
+    public void ChangeToSimMode()
     {
-        SceneManager.LoadScene("testmode");
+        SceneManager.LoadScene("SimMode");
     }
 
     void OnTriggerEnter(Collider other)
