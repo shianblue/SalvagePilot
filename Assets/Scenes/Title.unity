@@ -3601,7 +3601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fed0ea28a805049ae9b8cf02d05efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleManager
-  scene: testmode
+  scene: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+  scene2: {fileID: 102900000, guid: c644da52380dfc2428ac878950a3b151, type: 3}
 --- !u!4 &1781709720
 Transform:
   m_ObjectHideFlags: 0
@@ -3883,7 +3884,7 @@ MonoBehaviour:
     scale: 3
     offset: {x: 0, y: 0}
     fadeDuration: 0.1
-  sfxSource: 2
+  sfxSource: 0
   stylerPreset: {fileID: 11400000, guid: 62d3d5000dc484241a42d255128f3aa7, type: 2}
   highlightedSFX:
     stylerID: Hover SFX
@@ -3909,7 +3910,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1781709719}
         m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
-        m_MethodName: ChangeScene
+        m_MethodName: ChangeScene2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3944,7 +3945,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   settingsFoldout: 0
-  styleFoldout: 0
+  styleFoldout: 1
   navigationFoldout: 0
   referencesFoldout: 0
   eventsFoldout: 1

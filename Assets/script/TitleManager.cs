@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
-    [SerializeField] private string scene;
+    [SerializeField] private UnityEngine.Object scene;
+    [SerializeField] private UnityEngine.Object scene2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,12 +19,12 @@ public class TitleManager : MonoBehaviour
 
     public void ChangeScene()
     {
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene(scene.name);
     }
 
-    public void ChangeTestMode()
+    public void ChangeScene2()
     {
-        SceneManager.LoadScene("testmode");
+        SceneManager.LoadScene(scene2.name);
     }
 
     public void QuitGame()
