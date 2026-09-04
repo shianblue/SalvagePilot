@@ -16,11 +16,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem mainEngine;
     [SerializeField] private ParticleSystem subEngineRight;
     [SerializeField] private ParticleSystem subEngineLeft;
+
+    [SerializeField] private float maxSpeed = 50f;
     
     public Rigidbody rb;
     public RadialSlider slider;
     
-    
+    public float lateralSpeed => Vector3.Dot(rb.linearVelocity, transform.right);
+    public float forwardSpeed => Vector3.Dot(rb.linearVelocity, transform.forward);
+    public float verticalSpeed => rb.linearVelocity.y;
 
     public float time;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -111,16 +115,6 @@ public class PlayerController : MonoBehaviour
             qeValue += 1;
         }
         
-        bool isThrusting = wsValue == 1 && thrustForceMove >= 1;
-
-        bool mainActive = isThrusting;
-        bool subLeftActive = wsValue > 0 && isThrusting|| qeValue > 0;
-        bool subRightActive = wsValue > 0 && isThrusting|| qeValue < 0;
-        
-        EngineEffect(mainEngine, mainActive);
-        EngineEffect(subEngineRight, subRightActive);
-        EngineEffect(subEngineLeft, subLeftActive);
-        
         if (qeValue != 0)
         {
             rb.AddTorque(transform.up * (qeValue * thrustForceTorque), ForceMode.Force);
@@ -160,6 +154,19 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity -= transform.up * rb.linearVelocity.y;
         }
+        //==========================================
+        //                 other
+        //==========================================
+        bool isThrusting = wsValue == 1 && thrustForceMove >= 1;
+        bool mainActive = isThrusting;
+        bool subLeftActive = wsValue > 0 && isThrusting|| qeValue > 0;
+        bool subRightActive = wsValue > 0 && isThrusting|| qeValue < 0;
+        
+        EngineEffect(mainEngine, mainActive);
+        EngineEffect(subEngineRight, subRightActive);
+        EngineEffect(subEngineLeft, subLeftActive);
+        
+        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
     }
     void EngineEffect(ParticleSystem ps,bool isActive)
     {

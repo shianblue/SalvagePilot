@@ -7,10 +7,18 @@ public class UIManager : MonoBehaviour
 {
     private Delivery.DeliveryStatus _deliveryStatus;
     public TextMeshProUGUI goalsStatusText;
-    [SerializeField] private Notification hintNotification;
     [SerializeField] private OffScreenIndicator indicatorPoint1;
     [SerializeField] private OffScreenIndicator indicatorPoint2;
     [SerializeField] private GameObject missionCompletePanel;
+    
+    [SerializeField] private Notification hintNotification;
+    [SerializeField] private Notification phaseNotification;
+
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private Slider lateralSpeedSlider;
+    [SerializeField] private Slider forwardSpeedSlider;
+    [SerializeField] private Slider verticalSpeedSlider;
+    
     private enum Goals
     {
         Phase1,
@@ -48,6 +56,10 @@ public class UIManager : MonoBehaviour
                 SetPhase(Goals.Phase5);
             }
         }
+
+        lateralSpeedSlider.value = playerController.lateralSpeed;
+        forwardSpeedSlider.value = playerController.forwardSpeed;
+        verticalSpeedSlider.value = playerController.verticalSpeed;
     }
 
     private void SetPhase(Goals newPhase)
@@ -72,6 +84,8 @@ public class UIManager : MonoBehaviour
                 missionCompletePanel.SetActive(true);
                 break;
         }
+        phaseNotification.Title = "Goal Update";
+        phaseNotification.Open();
         indicatorPoint1.enabled = (newPhase == Goals.Phase1 || newPhase == Goals.Phase2);
         indicatorPoint2.enabled = (newPhase == Goals.Phase3 || newPhase == Goals.Phase4);
     }
