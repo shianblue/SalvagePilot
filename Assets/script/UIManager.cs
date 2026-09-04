@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    private Delivery.DeliveryStatus _deliveryStatus;
     public TextMeshProUGUI goalsStatusText;
     [SerializeField] private OffScreenIndicator indicatorPoint1;
     [SerializeField] private OffScreenIndicator indicatorPoint2;
@@ -13,11 +12,6 @@ public class UIManager : MonoBehaviour
     
     [SerializeField] private Notification hintNotification;
     [SerializeField] private Notification phaseNotification;
-
-    [SerializeField] private PlayerController playerController;
-    [SerializeField] private Slider lateralSpeedSlider;
-    [SerializeField] private Slider forwardSpeedSlider;
-    [SerializeField] private Slider verticalSpeedSlider;
     
     private enum Goals
     {
@@ -56,10 +50,6 @@ public class UIManager : MonoBehaviour
                 SetPhase(Goals.Phase5);
             }
         }
-
-        lateralSpeedSlider.value = playerController.lateralSpeed;
-        forwardSpeedSlider.value = playerController.forwardSpeed;
-        verticalSpeedSlider.value = playerController.verticalSpeed;
     }
 
     private void SetPhase(Goals newPhase)

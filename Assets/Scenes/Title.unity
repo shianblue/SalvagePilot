@@ -2035,7 +2035,7 @@ MonoBehaviour:
     scale: 3
     offset: {x: 0, y: 0}
     fadeDuration: 0.1
-  sfxSource: 2
+  sfxSource: 0
   stylerPreset: {fileID: 11400000, guid: 62d3d5000dc484241a42d255128f3aa7, type: 2}
   highlightedSFX:
     stylerID: Hover SFX
@@ -2096,7 +2096,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   settingsFoldout: 0
-  styleFoldout: 0
+  styleFoldout: 1
   navigationFoldout: 0
   referencesFoldout: 0
   eventsFoldout: 1
@@ -2563,7 +2563,7 @@ MonoBehaviour:
   onSubmit:
     m_PersistentCalls:
       m_Calls: []
-  settingsFoldout: 1
+  settingsFoldout: 0
   styleFoldout: 0
   navigationFoldout: 0
   referencesFoldout: 0

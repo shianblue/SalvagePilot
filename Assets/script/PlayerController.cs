@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Evo.UI;
+using Slider = Evo.UI.Slider;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float thrustForceY; //Y軸のスロットル....UIでのスロットル操作を分けるためにMoveと分割。統一したほうが自然か
     [SerializeField] private float thrustForceRevers; //逆噴射のパワー
-    
     [SerializeField] public float thrustForceMove;
     [SerializeField] private float reversedThrustForceMove;
-
     [SerializeField] private float thrustForceTorque;
     [SerializeField] private float reversedThrustForceTorque;
 
@@ -18,6 +17,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem subEngineLeft;
 
     [SerializeField] private float maxSpeed = 50f;
+    
+    [SerializeField] private Slider lateralSpeedSlider;
+    [SerializeField] private Slider forwardSpeedSlider;
+    [SerializeField] private Slider verticalSpeedSlider;
     
     public Rigidbody rb;
     public RadialSlider slider;
@@ -169,6 +172,10 @@ public class PlayerController : MonoBehaviour
         float clampedForward = Mathf.Clamp(forwardSpeed,-maxSpeed,maxSpeed);
         float clampedLateral = Mathf.Clamp(lateralSpeed,-maxSpeed,maxSpeed);
         float clampedVertical = Mathf.Clamp(verticalSpeed,-maxSpeed,maxSpeed);
+        
+        lateralSpeedSlider.value = lateralSpeed;
+        forwardSpeedSlider.value = forwardSpeed;
+        verticalSpeedSlider.value = verticalSpeed;
         
         rb.linearVelocity = transform.forward * clampedForward + transform.right * clampedLateral + Vector3.up * clampedVertical;
     }
