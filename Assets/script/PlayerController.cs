@@ -166,7 +166,11 @@ public class PlayerController : MonoBehaviour
         EngineEffect(subEngineRight, subRightActive);
         EngineEffect(subEngineLeft, subLeftActive);
         
-        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
+        float clampedForward = Mathf.Clamp(forwardSpeed,-maxSpeed,maxSpeed);
+        float clampedLateral = Mathf.Clamp(lateralSpeed,-maxSpeed,maxSpeed);
+        float clampedVertical = Mathf.Clamp(verticalSpeed,-maxSpeed,maxSpeed);
+        
+        rb.linearVelocity = transform.forward * clampedForward + transform.right * clampedLateral + Vector3.up * clampedVertical;
     }
     void EngineEffect(ParticleSystem ps,bool isActive)
     {
