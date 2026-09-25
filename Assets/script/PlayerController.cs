@@ -3,12 +3,12 @@ using Evo.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float reversedThrustForce; //逆噴射のパワー
+    [SerializeField] private float thrustForceY; //Y軸のスロットル....UIでのスロットル操作を分けるためにMoveと分割。
+    [SerializeField] private float reversedThrustForce; //Y軸逆噴射のパワー
     [SerializeField] private float thrustForceMove;
     [SerializeField] private float reversedThrustForceMove;
     [SerializeField] private float thrustForceTorque;
     [SerializeField] private float reversedThrustForceTorque;
-    [SerializeField] private float thrustForceY; //Y軸のスロットル....UIでのスロットル操作を分けるためにMoveと分割。
 
     [SerializeField] private ParticleSystem mainEngine;
     [SerializeField] private ParticleSystem subEngineRight;
@@ -182,5 +182,11 @@ public class PlayerController : MonoBehaviour
         {
             ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         }
+    }
+
+    public void SetReversePower(float value)
+    {
+        reversedThrustForceMove = value;
+        Debug.Log(reversedThrustForceMove);
     }
 }
