@@ -184,9 +184,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetReversePower(float value)
+    public void  SetReversePower(float value,float valueVer,float valueRot)
     {
         reversedThrustForceMove = value;
+        reversedThrustForce = valueVer;
+        reversedThrustForceTorque = valueRot;
         Debug.Log(reversedThrustForceMove);
     }
 }
