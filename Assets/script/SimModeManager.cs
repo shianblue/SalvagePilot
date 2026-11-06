@@ -13,13 +13,14 @@ public class SimModeManager : MonoBehaviour
     void Start()
     {
         setting.SetActive(false);
-        player.SetReversePower(reversePower.value, reversePowerVer.value, reversePowerRot.value);
         
         foreach (Slider slider in new[] {reversePower, reversePowerVer, reversePowerRot})
         {
             slider.value = 500f;
             slider.onValueChanged.AddListener(_ => ApplyReverPower());
         }
+        
+        player.SetReversePower(reversePower.value, reversePowerVer.value, reversePowerRot.value);
     }
 
     private void ApplyReverPower()
