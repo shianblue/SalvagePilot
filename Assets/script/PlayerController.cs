@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem mainEngine;
     [SerializeField] private ParticleSystem subEngineRight;
     [SerializeField] private ParticleSystem subEngineLeft;
+    [SerializeField] private ParticleSystem frontRight;
+    [SerializeField] private ParticleSystem frontLeft;
+    [SerializeField] private ParticleSystem rearRight;
+    [SerializeField] private ParticleSystem rearLeft;
 
     [SerializeField] private float maxSpeed = 50f;
     
@@ -101,6 +105,7 @@ public class PlayerController : MonoBehaviour
         //               ROTATE_Q/E
         //==========================================
         int qeValue = 0;
+        bool isBraking = false;
         float qeDot = Vector3.Dot(rb.angularVelocity, transform.up);
         if (Input.GetKey(KeyCode.Q))
         {
@@ -119,6 +124,7 @@ public class PlayerController : MonoBehaviour
         else if (Mathf.Abs(qeDot) > angularBrakeStep)
         {
             rb.AddTorque(transform.up * (reversedThrustForceTorque * -Mathf.Sign(qeDot)), ForceMode.Force);
+            isBraking = true;
         }
         else
         {
@@ -155,12 +161,19 @@ public class PlayerController : MonoBehaviour
         //==========================================
         bool isThrusting = wsValue == 1 && thrustForceMove >= 1;
         bool mainActive = isThrusting;
-        bool subLeftActive = isThrusting || qeValue > 0;
-        bool subRightActive = isThrusting || qeValue < 0;
+        bool subLeftActive = isThrusting;
+        bool subRightActive = isThrusting;
+        bool isTurning = qeValue == 1 || qeValue == -1 && thrustForceTorque >= 1;//これを使って旋回時のエフェクトを起動させる方法は下のEnginEffectを参照
+        //エフェクトの条件
         
         EngineEffect(mainEngine, mainActive);
         EngineEffect(subEngineRight, subRightActive);
         EngineEffect(subEngineLeft, subLeftActive);
+        EngineEffect(frontRight, (isBraking && qeDot > 0) || (isTurning && qeValue < 0));
+        EngineEffect(frontLeft, (isBraking && qeDot < 0) || (isTurning && qeValue > 0));
+        EngineEffect(rearRight, (isBraking && qeDot < 0) || (isTurning && qeValue > 0));
+        EngineEffect(rearLeft, (isBraking && qeDot > 0) || (isTurning && qeValue < 0));
+        //エンジンのパーティクルの起動
         
         float clampedForward = Mathf.Clamp(forwardSpeed, -maxSpeed, maxSpeed);
         float clampedLateral = Mathf.Clamp(lateralSpeed, -maxSpeed, maxSpeed);
@@ -172,7 +185,7 @@ public class PlayerController : MonoBehaviour
         forwardSpeedSlider.value = clampedForward;
         verticalSpeedSlider.value = clampedVertical;
     }
-    void EngineEffect(ParticleSystem ps,bool isActive)
+    void EngineEffect(ParticleSystem ps,bool isActive)//エンジンのパーティクルシステムを起動する
     {
         if (isActive && !ps.isEmitting)
         {
@@ -184,7 +197,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void  SetReversePower(float value,float valueVer,float valueRot)
+    public void  SetReversePower(float value,float valueVer,float valueRot)//SimModeで推力を調整するため
     {
         reversedThrustForceMove = value;
         reversedThrustForce = valueVer;
